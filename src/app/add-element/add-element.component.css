@@ -1,0 +1,35 @@
+.add-element-container {
+    width: 50vw;
+    margin: auto;
+}
+.myHeader {
+    text-align: center;
+}
+
+.myRow {
+    display: flex;
+    justify-content: space-between;
+}
+.myfieldset {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+}
+.myfieldset legend {
+    width: auto;
+}
+.errorUpload {
+    color:#f44336;
+    margin: 10px 0;
+}
+.fieldsetError {
+    border-color: #f44336;
+}
+.spinnerParent {
+    position: fixed;
+    width: 0vw;
+    top:40vh;
+    left: 46vw;
+
+}

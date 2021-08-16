@@ -1,0 +1,53 @@
+<!-- Error template-->
+<ng-container *ngIf="error">
+    <app-action-model [status]="'error'" [message] = "error" (close)="this.error = null"></app-action-model>
+</ng-container>
+
+<!-- Spinner template -->
+<ng-template #spinner>
+    <div class="spinnerParent">
+        <app-spinner [showCancel]="false"></app-spinner>
+    </div>
+</ng-template>
+
+<!-- Main template -->
+<div *ngIf="!showSpinner; else spinner">
+    <div class="container">
+        <div class="itemInfo">
+            <h2 class="itemTitle">{{itemDetails.title}}</h2>
+            <div>Subject: <span class="text-muted">{{itemDetails.subject}}</span> </div>
+            <div>Created At: <span class="text-primary">{{itemDetails.created_at}}</span> </div>
+            <div>Updated At: <span class="text-primary">{{itemDetails.updated_at}}</span> </div>
+        </div>
+        <div class="itmMedia">
+            <h4>Media:</h4>
+            <div class="row" >
+                <div class="image col-md-5">
+                    <h6>Photo:</h6>
+                    <div class="imageParent">
+                        <img [src]="photo.media" width="100%"  >
+                    </div>
+                </div>
+                <div class="video col-md-5">
+                    <h6>Video:</h6>
+                    <div class="videoParent">
+                        <video width="100%"  controls loop preload="none" style="border: 1px solid #AAA;">
+                            <source [src]="video.media" type="video/mp4">
+                            Your browser does not support video
+                        </video>
+                    </div>
+                </div>
+                <div class="file col-md-2">
+                    <h6>File:</h6>
+                    <div class="fileParent">
+                        <div><mat-icon>description</mat-icon></div>
+                        <div><a mat-raised-button color="primary" href="{{file.media}}">Download File</a></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

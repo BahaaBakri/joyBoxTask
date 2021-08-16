@@ -1,0 +1,36 @@
+<!-- Error template-->
+<ng-container *ngIf="error">
+    <app-action-model [status]="'error'" [message] = "error" (close)="this.error = null"></app-action-model>
+</ng-container>
+
+<!-- Spinner template -->
+<ng-template #spinner>
+    <div class="spinnerParent">
+        <app-spinner [showCancel]="false"></app-spinner>
+    </div>
+</ng-template>
+
+<!-- Main template -->
+<div *ngIf="!showSpinner; else spinner" class="container ">
+    <div class="row ">
+    <div class = "col-sm-6 col-md-4" *ngFor="let item of items">
+        <mat-card class="myCard ">
+              <h3 class="itemTitle">{{item.title}}</h3>
+            <mat-card-content>
+              <p class="itemContent">
+                {{item.subject}}
+              </p>
+              <p class="itemContent">
+                  Created At: <span class="text-muted">{{item.created_at}}</span>
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" [routerLink]="item.id">Details</button>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+    </div>
+
+</div>
+
+  

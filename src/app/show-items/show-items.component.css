@@ -1,0 +1,22 @@
+.myRow {
+    display: flex;
+    justify-content: space-between;
+}
+.spinnerParent {
+    position: fixed;
+    width: 0vw;
+    top:40vh;
+    left: 46vw;
+
+}
+.myCard {
+    background-color: #c3c2c531;
+    margin: 10px 0;
+}
+.itemTitle {
+    text-align: center;
+    margin-bottom: 12px;
+}
+.itemContent {
+    word-wrap: break-word;
+}

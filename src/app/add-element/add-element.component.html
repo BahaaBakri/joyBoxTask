@@ -1,0 +1,108 @@
+<!-- Error template-->
+<ng-container *ngIf="error">
+    <app-action-model [status]="'error'" [message] = "error" (close)="this.error = null"></app-action-model>
+</ng-container>
+<!-- Success template-->
+<ng-container *ngIf="success">
+    <app-action-model [status]="'success'" [message] = "success" (close)="this.success = null"></app-action-model>
+</ng-container>
+<!-- Spinner template-->
+<div class="spinnerParent" *ngIf="showSpinner">
+    <app-spinner [showCancel]="true" (cancel)="onCancelAdd()"></app-spinner>
+</div>
+<!-- Main template-->
+<div *ngIf="!error&&!success" class="add-element-container">
+    <h2 class="myHeader">Add New Element</h2>
+    <form [formGroup]="addElement" (ngSubmit) ="onSubmit()">
+        <div class="myRow">
+            <!-- title-->
+            <mat-form-field appearance="outline"  style="width: 49%;" >
+                <mat-label >Title</mat-label>
+                <input matInput  formControlName="title">
+                <mat-icon matSuffix class="secondary-text">text_format</mat-icon>
+                <mat-error>  title is requierd</mat-error>
+            </mat-form-field>
+            <!-- subject-->
+            <mat-form-field appearance="outline"  style="width: 49%;">
+                <mat-label >Subject</mat-label>
+                <input matInput  formControlName="subject">
+                <mat-icon matSuffix class="secondary-text">text_format</mat-icon>
+                <mat-error *ngIf="addElement.controls['subject'].errors?.required">  subject is required </mat-error>
+                <mat-error *ngIf="addElement.controls['subject'].errors?.minlength">  subject must be at least 10 characters  </mat-error>
+            </mat-form-field>
+        </div>
+        <!--  Upload Image -->
+        <fieldset class="myfieldset" [ngClass]="{'fieldsetError':errorImage && imageFile?.length === 0}">
+            <legend>
+                <input type="file"
+                accept="image/png, image/gif, image/jpeg"
+                (change)="onFileSelected($event, 'image')" style="display: none;" #fileInputImage>
+                <button type="button" mat-raised-button  (click)="fileInputImage.click()">Upload Image</button>
+
+            </legend>
+            <div>
+                <p>{{imageFile?.name}}</p>
+            </div>
+        </fieldset>
+
+        <!-- Error message when error in image type-->
+        <ng-container>
+            <div *ngIf="errorImage && imageFile.length === 0" class="errorUpload">
+                image is requierd
+            </div>
+        </ng-container>
+        <!--  Upload Document -->
+        <fieldset class="myfieldset" [ngClass]="{'fieldsetError':errorDoc && docFile?.length === 0}">
+            <legend>
+                <input type="file"
+                accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                text/plain, application/pdf"
+                (change)="onFileSelected($event, 'document')" style="display: none;" #fileInputDoc>
+                <button type="button" mat-raised-button  (click)="fileInputDoc.click()">Upload Document</button>
+
+            </legend>
+            <div>
+                <p>{{docFile?.name}}</p>
+            </div>
+        </fieldset>
+        <!-- Error message when error in document type-->
+        <ng-container>
+            <div *ngIf="errorDoc && docFile.length === 0" class="errorUpload">
+                file is requierd
+            </div>
+        </ng-container>
+
+        <!-- Upload video -->
+        <fieldset class="myfieldset" [ngClass]="{'fieldsetError':errorVideo && videoFile?.length === 0}">
+            <legend>
+                <input type="file"
+                accept="video/mp4,video/x-m4v,video/*"
+                (change)="onFileSelected($event, 'video')" style="display: none;" #fileInputVideo>
+                <button type="button" mat-raised-button (click)="fileInputVideo.click()">Upload Video</button>
+
+            </legend>
+            <div>
+                <p>{{videoFile?.name}}</p>
+            </div>
+        </fieldset>
+        <!-- Error message when error in video type-->
+        <ng-container>
+            <div *ngIf="errorVideo && videoFile.length === 0" class="errorUpload">
+                video is requierd
+            </div>
+        </ng-container>
+
+        <!-- Submit form-->
+        <div>
+            <button type="submit"
+                mat-raised-button
+                color="primary"
+                style="width: 100%; padding: 5px 0;"
+                [disabled]="addElement.invalid || docFile == null || imageFile == null || videoFile == null">
+                Save
+            </button>
+
+        </div>
+    </form>
+</div>
+
